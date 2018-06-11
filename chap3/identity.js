@@ -2,7 +2,7 @@ const fs = require("fs");
 
 class FileObject {
     constructor() {
-        this.filename = '';
+        this.filename = process.argv[2] || '';
     }
 
     file_exists(cb) {
@@ -21,7 +21,7 @@ class FileObject {
 }
 
 const fo = new FileObject();
-fo.filename = "file_that_does_not_exist";
+fo.filename = process.argv[2] || "file_that_does_not_exist";
 fo.file_exists((err, results) => {
     if (err) {
         console.log(`\nError opening file: ${JSON.stringify(err)}`);
