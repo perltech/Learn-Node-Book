@@ -9,7 +9,26 @@ const loadAlbumList = cb => {
             cb(err);
             return;
         }
-        cb(null, files);
+
+        let onlyDirs = [];
+
+        const iterator = (index) => {
+            if (index === files.length) {
+                cb(null, onlyDirs);
+                return;
+            }
+            fs.stat(`albums/${files[index]}`, (err, stats) => {
+                if (err) {
+                    cb(err);
+                    return;
+                }
+                if (stats.isDirectory()) {
+                    onlyDirs.push(files[index]);
+                }
+                iterator(index + 1);
+            });
+        };
+        iterator(0);
     });
 };
 
