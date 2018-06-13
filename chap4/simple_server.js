@@ -3,7 +3,6 @@ const http = require("http");
 const PORT = 8080;
 
 const loadAlbumList = cb => {
-    //Assuming every directory in "albums" is, in fact, an album
     fs.readdir("albums", (err, files) => {
         if (err) {
             cb(err);
